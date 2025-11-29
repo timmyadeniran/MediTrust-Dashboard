@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Register — MediTrust</title>
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-bg">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <img src="assets/logo.svg" alt="logo">
+        <div>
+          <div class="auth-title">Create your account</div>
+          <div class="auth-sub">Quick demo account for local testing</div>
+        </div>
+      </div>
+
+      <input id="regUser" class="input" placeholder="Choose a username">
+      <input id="regPass" class="input" type="password" placeholder="Create a password">
+      <input id="regHeight" class="input" placeholder="Height (cm) — optional (improves distance calc)">
+
+      <button class="btn-auth" onclick="registerUser()">Create Account</button>
+
+      <div class="auth-meta">
+        <div class="small">Already have an account? <a href="login.html">Sign in</a></div>
+        <div class="small back-home"><a href="index.html">Back to home</a></div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

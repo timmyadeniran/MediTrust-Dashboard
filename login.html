@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — MediTrust</title>
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-bg">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <img src="assets/logo.svg" alt="logo">
+        <div>
+          <div class="auth-title">MediTrust Dashboard</div>
+          <div class="auth-sub">Sign in to access your fitness dashboard</div>
+        </div>
+      </div>
+
+      <input id="logUser" class="input" placeholder="Username">
+      <input id="logPass" class="input" type="password" placeholder="Password">
+
+      <button class="btn-auth" onclick="loginUser()">Sign In</button>
+
+      <div class="auth-meta">
+        <div class="small">Don't have an account? <a href="register.html">Create</a></div>
+        <div class="small back-home"><a href="index.html">Back to home</a></div>
+      </div>
+    </div>
+  </div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

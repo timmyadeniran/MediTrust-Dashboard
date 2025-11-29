@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>History</title>
+<link rel="stylesheet" href="css/styles.css"></head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.svg" class="logo"><span class="brand">MediTrust</span></div>
+    <div><button class="nav-btn" onclick="window.location.href='dashboard.html'">Back</button></div>
+  </header>
+
+  <main style="max-width:1100px;margin:18px auto;padding:0 18px;">
+    <div class="card">
+      <h3>Workout History</h3>
+      <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+        <input id="filterDate" class="input" placeholder="Filter date (e.g. 11/28/2025)">
+        <button class="btn-auth" onclick="filterHistory()">Filter</button>
+        <button class="btn-auth alt" onclick="clearFilter()">Clear</button>
+      </div>
+
+      <div style="margin-top:12px;overflow:auto">
+        <table class="table" id="historyTable">
+          <thead><tr><th>Date</th><th>Steps</th><th>Minutes</th><th>Distance (km)</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+<script src="js/app.js"></script>
+<script>
+function renderHistory(list){
+  const tbody = document.querySelector('#historyTable tbody');
+  tbody.innerHTML = '';
+  list = list || JSON.parse(localStorage.getItem('stepsData')||'[]');
+  if(list.length===0) { tbody.innerHTML = '<tr><td colspan="4">No records</td></tr>'; return; }
+  list.slice().reverse().forEach(r=>{
+    const dist = ((r.steps||0)*(0.78))/1000;
+    tbody.insertAdjacentHTML('beforeend', `<tr><td>${r.date}</td><td>${r.steps||0}</td><td>${r.minutes||0}</td><td>${dist.toFixed(2)}</td></tr>`);
+  });
+}
+function filterHistory(){
+  const q = document.getElementById('filterDate').value.trim();
+  const all = JSON.parse(localStorage.getItem('stepsData')||'[]');
+  if(!q){ renderHistory(all); return; }
+  const matched = all.filter(x=> x.date.includes(q));
+  renderHistory(matched);
+}
+function clearFilter(){ document.getElementById('filterDate').value=''; renderHistory(); }
+document.addEventListener('DOMContentLoaded', ()=> renderHistory());
+
+<footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">MediTrust</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Ota, Ogun State, Nigeria</p>
+            <p>Bells University of Technology</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+234 915 558 0571</span></p>
+            <p><strong>Email:</strong> <span>timisniran@gmail.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="dashboard.html">Tracker</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+
+
+        
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">MediTrust</strong> <span>All Rights Reserved</span></p>
+    </div>
+
+  </footer>
+
+</script>
+</body>
+</html>
