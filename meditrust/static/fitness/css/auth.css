@@ -1,0 +1,48 @@
+/* auth.css - MediTrust glass style for auth pages */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+:root{
+  --mt-blue:#00a3e0;
+  --mt-dark:#002a3d;
+  --glass: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.18);
+  --accent: linear-gradient(135deg,var(--mt-blue),#007bb5);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;color:#fff;background:#071c27}
+.auth-bg{
+  background-image: url('assets/auth-bg.jpg');
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+.auth-bg::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,22,34,0.62), rgba(1,14,22,0.82));
+}
+.auth-wrap{
+  position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; justify-content:center;
+}
+.auth-card{
+  width:420px; padding:34px; border-radius:18px; background:var(--glass); border:1px solid var(--glass-border); backdrop-filter: blur(8px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+.auth-brand{ display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+.auth-brand img{ width:44px; height:44px; border-radius:8px; background:#fff; padding:6px; }
+.auth-title{ font-size:22px; margin:0 0 6px;}
+.auth-sub{ font-size:13px; color:rgba(255,255,255,0.85); margin-bottom:18px;}
+.input{
+  width:100%; padding:12px 14px; margin-bottom:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); color:#fff;
+}
+.input::placeholder{ color:rgba(255,255,255,0.65)}
+.btn-auth{
+  display:inline-block; width:100%; padding:12px 16px; border-radius:28px; border:none; cursor:pointer; font-weight:700;
+  color:#fff; background:var(--accent); box-shadow:0 10px 30px rgba(0,163,224,0.12);
+}
+.btn-auth.alt{ background:transparent; border:1px solid rgba(255,255,255,0.12); color:#e8faff}
+.auth-meta{display:flex; justify-content:space-between; align-items:center; margin-top:12px;}
+.small{ font-size:13px; color:rgba(255,255,255,0.8)}
+.back-home a{ color:#bfefff; text-decoration:none }
+@media(max-width:520px){
+  .auth-card{ width:92%; padding:22px}
+}

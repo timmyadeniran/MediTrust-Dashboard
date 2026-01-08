@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meditrust | Register</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mediblue: '#0D6EFD',
+                        medigreen: '#198754'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+<!-- Main Card -->
+<div class="bg-white shadow-lg rounded-4 w-100 p-4 p-md-5 animate-fade-in"
+     style="max-width: 520px;">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-medigreen mb-1">Meditrust</h2>
+        <p class="text-muted mb-0">
+            Create your fitness account
+        </p>
+    </div>
+
+    <!-- Django Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Registration Form -->
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        <!-- First & Last Name -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">First Name</label>
+                <input
+                    type="text"
+                    name="first_name"
+                    class="form-control"
+                    placeholder="First name"
+                    required
+                >
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input
+                    type="text"
+                    name="last_name"
+                    class="form-control"
+                    placeholder="Last name"
+                    required
+                >
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="example@meditrust.com"
+                required
+            >
+        </div>
+
+        <!-- Username -->
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Choose a username"
+                required
+            >
+        </div>
+
+        <!-- Password -->
+        <div class="mb-2">
+            <label class="form-label">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Create a strong password"
+                onkeyup="checkStrength()"
+                required
+            >
+        </div>
+
+        <!-- Password Strength Bar -->
+        <div class="progress mb-3" style="height: 6px;">
+            <div
+                id="strengthBar"
+                class="progress-bar"
+                role="progressbar"
+                style="width: 0%;">
+            </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-4">
+            <label class="form-label">Confirm Password</label>
+            <input
+                type="password"
+                name="confirm_password"
+                class="form-control"
+                placeholder="Re-enter password"
+                required
+            >
+        </div>
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="btn btn-success w-100 py-2 fw-semibold">
+            Create Account
+        </button>
+    </form>
+
+    <!-- Login Link -->
+    <p class="text-center mt-4 mb-0">
+        <small>
+            Already have an account?
+            <a
+                href="{% url 'login' %}"
+                class="text-mediblue fw-semibold text-decoration-none">
+                Login
+            </a>
+        </small>
+    </p>
+
+</div>
+
+<!-- Password Strength Script -->
+<script>
+function checkStrength() {
+    const pwd = document.getElementById("password").value;
+    const bar = document.getElementById("strengthBar");
+
+    let strength = 0;
+    if (pwd.length >= 8) strength++;
+    if (/[A-Z]/.test(pwd)) strength++;
+    if (/[0-9]/.test(pwd)) strength++;
+    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+
+    bar.style.width = (strength * 25) + "%";
+
+    if (strength <= 1) {
+        bar.className = "progress-bar bg-danger";
+    } else if (strength <= 3) {
+        bar.className = "progress-bar bg-warning";
+    } else {
+        bar.className = "progress-bar bg-success";
+    }
+}
+</script>
+
+<!-- Subtle Animation -->
+<style>
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+</body>
+</html>

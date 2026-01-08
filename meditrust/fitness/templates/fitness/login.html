@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Meditrust | Login</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              mediblue: "#0D6EFD",
+              medigreen: "#198754",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="bg-slate-100 min-h-screen flex items-center justify-center">
+    <div
+      class="bg-white shadow-lg rounded-4 p-4 p-md-5 w-100 animate-fade-in"
+      style="max-width: 420px"
+    >
+      <h2 class="text-center text-mediblue fw-bold mb-1">Meditrust</h2>
+      <p class="text-center text-muted mb-4">
+        Secure access to your fitness dashboard
+      </p>
+
+      {% if form.errors %}
+      <div class="alert alert-danger text-center">
+        Invalid username or password
+      </div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            placeholder="Enter username"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter password"
+            required
+          />
+        </div>
+
+        <button class="btn btn-primary w-100 py-2 fw-semibold">Login</button>
+      </form>
+
+      <p class="text-center mt-4">
+        <small>
+          Don’t have an account?
+          <a
+            href="{% url 'register' %}"
+            class="text-medigreen fw-semibold text-decoration-none"
+          >
+            Register
+          </a>
+        </small>
+      </p>
+    </div>
+
+    <style>
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </body>
+</html>
